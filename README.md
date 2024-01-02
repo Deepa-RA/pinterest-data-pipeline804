@@ -3,6 +3,7 @@
 ## Contents
 1) Introduction
 2) Set up the environment
+3) 
 
 ## Introduction
 Pinterest crunches billions of data points every day to decide how to provide more value to their users. In this project, the AWS cloud is utilised to mimic this system.
@@ -10,6 +11,8 @@ Pinterest crunches billions of data points every day to decide how to provide mo
 This project demonstrates the following skills:
 1) Connecting and navigating to AWS
 2) Configuring an Amazon EC2 instance to use as an Apache Kafka client machine
+3) Configuring EC2 Kafka Client
+4) Connecting a MSK cluster to a S3 bucket
 
 ## Instructions
 
