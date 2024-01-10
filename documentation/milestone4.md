@@ -15,7 +15,7 @@ ssh -i "128a59195de3-key-pair.pem" ec2-user@ec2-54-208-238-180.compute-1.amazona
 ```
 2)  To do download & copy this connector run the code below inside your client machine:
 ```
-assume admin user privileges
+# assume admin user privileges
 sudo -u ec2-user -i
 # create directory where we will save our connector 
 mkdir kafka-connect-s3 && cd kafka-connect-s3
