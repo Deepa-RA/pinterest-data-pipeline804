@@ -7,21 +7,56 @@ import json
 import sqlalchemy
 from sqlalchemy import text
 from datetime import datetime, date
+import yaml
+from sqlalchemy import create_engine, inspect
 
 random.seed(100)
 
-
 class AWSDBConnector:
 
-    def __init__(self):
-#credentials
+    def __init__(self,creds_file):
+        """
+        Initialise the DataConnector instance with credentials from specified YAML file.
+
+        Args:
+            creds_file (str): YAML file containing database credentials.
+        """
+        self.creds_file = creds_file
+        self.db_creds = self.read_db_creds()
+        self.engine = self.create_db_connector()
+
+    # read credentials from yaml file and return dictionary of credentials
+    def read_db_creds(self):
+         """
+        Reads database credentials from a YAML file and returns them as a dictionary.
+
+        Returns:
+        dict: Database credentials.
+        """
+         with open(self.creds_file, 'r') as f:
+            try:
+                inputfile = yaml.safe_load(f)
+                return inputfile  
+            except yaml.YAMLError as exc:
+                print(f"File configuration error: {exc}")
+       
         
     def create_db_connector(self):
-        engine = sqlalchemy.create_engine(f"mysql+pymysql://{self.USER}:{self.PASSWORD}@{self.HOST}:{self.PORT}/{self.DATABASE}?charset=utf8mb4")
+        # Read the credentials from the YAML file
+        creds = self.db_creds
+        # Extract the credentials
+        HOST = creds['HOST']
+        USER = creds['USER']
+        PASSWORD = creds['PASSWORD']
+        DATABASE = creds['DATABASE']
+        PORT = creds['PORT']
+
+       # Create and return the SQLAlchemy engine
+        engine= sqlalchemy.create_engine(f"mysql+pymysql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}?charset=utf8mb4")
         return engine
 
-
-new_connector = AWSDBConnector()
+new_connector = AWSDBConnector('db_creds.yaml')
+db_creds = new_connector.read_db_creds()
 
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
@@ -88,5 +123,3 @@ if __name__ == "__main__":
     print('Working')
     
     
-
-

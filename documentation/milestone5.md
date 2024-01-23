@@ -51,6 +51,12 @@ client.sasl.jaas.config = software.amazon.msk.auth.iam.IAMLoginModule required a
 client.sasl.client.callback.handler.class = software.amazon.msk.auth.iam.IAMClientCallbackHandler
 ```
 To allow communication between the REST proxy and the cluster brokers, all configurations should be prefixed with client.
+
+4) Ensure the CLASSPATH environment variable is set. This will store the location of the aws-msk-iam-auth-1.1.5-all.jar file and give the Kafka client access to the Amazon MSK IAM libraries regardless of the location commands are run from.
+```
+export CLASSPATH=/home/ec2-user/kafka_2.12-2.8.1/libs/aws-msk-iam-auth-1.1.5-all.jar
+```
+
 ### Step 3 - Start the REST proxy
 Before sending messages to the API, in order to make sure they are consumed in MSK, we need to start our REST proxy.
 1) Navigate to the `confluent-7.2.0/bin folder`.
@@ -60,3 +66,21 @@ cd confluent-7.2.0/bin
 ./kafka-rest-start /home/ec2-user/confluent-7.2.0/etc/kafka-rest/kafka-rest.properties
 ```
 If successful and your proxy is ready to receive requests from the API, you should see `INFO Server started, listening for requests...` in your EC2 console.
+
+## Send Data to API
+Data is sent to the API, which in turn sends data to the MSK cluster using the plugin-connector pair.
+
+1) Python file user_posting_emulation.py updated with a method to send data to Kafka topics using API Invoke URL.
+
+load_data(record, topic) is created to take the data (record) and send it to corresponding Kafka topic (topic).
+
+The invoke URL comes in the format https://YourAPIInvokeURL/test/topics/<AllYourTopics>.
+
+The topic names are: 128a59195de3.pin, 128a59195de3.geo, 128a59195de3.user.
+
+The records contain datetime data which causes as error when serialising the Python dictionaries to JSON format. The json_serial(obj) function is created to serialise datetime objects to ISO format. This represents date and time in a standardised format e.g. YYYY-MM-DDTHH:MM:SS.sssZ.
+
+Run this file for multiple iterations to ensure sufficient data is sent to Kafka topics to be investigated later in Databricks.
+
+2) Check if data is getting stored in the S3 bucket. Notice the folder organisation (e.g topics/<your_UserId>.pin/partition=0/) that your connector creates in the bucket.
+
