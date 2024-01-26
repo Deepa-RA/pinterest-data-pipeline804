@@ -2,7 +2,7 @@
 
 ## Contents
 1) Introduction
-2) Set up the environment
+2) Instructions
 3) 
 
 ## Introduction
@@ -35,4 +35,4 @@ cd pinterest-data-pipeline804/
 ```
 ### Running the project
 1) The directory /documentation contains guidance for completing each milestone
-2) The directory /Databricks_notebooks contains notebooks used in Databricks for Batch processing the data.
+2) The directory /Databricks_notebooks contains notebooks used in Databricks for Batch processing the data
