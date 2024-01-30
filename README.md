@@ -3,7 +3,6 @@
 ## Contents
 1) Introduction
 2) Instructions
-3) 
 
 ## Introduction
 Pinterest crunches billions of data points every day to decide how to provide more value to their users. In this project, the AWS cloud is utilised to mimic this system.
@@ -21,6 +20,13 @@ Milestone 5
 4) Configuring an API in API Gateway. API will send data to the MSK Cluster, through the connector, storing data in the S3 bucket.
 Milestone 6 
 1) Read data from AWS into Databricks
+Milestone 7
+1) Cleaning the dataframes on Databricks
+2) Querying the data on Databricks
+Milestone 8
+Orchestrate Databricks workload on AWS MWAA
+1) Create and upload a DAG to MWAA environment
+2) Trigger DAG to run Databricks notebook
 
 ## Instructions
 
