@@ -1,4 +1,4 @@
-# Milestone 7 - Batch Processing: AWS MWAA
+# Milestone 8 - Batch Processing: AWS MWAA
 This milestone demonstrates how to orchestrate Databricks Workloads on AWS MWAA
 ## Create & upload a DAG to MWAA
 - DAGs (Directed Acyclic Graphs) are used to define a workflow (order and execution of jobs).

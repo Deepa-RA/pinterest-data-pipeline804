@@ -70,7 +70,7 @@ If successful and your proxy is ready to receive requests from the API, you shou
 ## Send Data to API
 Data is sent to the API, which in turn sends data to the MSK cluster using the plugin-connector pair.
 
-1) Python file user_posting_emulation.py updated with a method to send data to Kafka topics using API Invoke URL.
+1) Python file user_posting_emulation.py in the `scripts` directory is updated with a method to send data to Kafka topics using API Invoke URL.
 
 load_data(record, topic) is created to take the data (record) and send it to corresponding Kafka topic (topic).
 

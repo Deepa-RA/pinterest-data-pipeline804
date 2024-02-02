@@ -28,6 +28,17 @@ Orchestrate Databricks workload on AWS MWAA
 1) Create and upload a DAG to MWAA environment
 2) Trigger DAG to run Databricks notebook
 
+The key tools utilised in this project include:
+
+AWS EC2: create an EC2 instance to manage batch processing of data
+AWS IAM: IAM User authentication on the MSK Cluster for batch data processing and for Kinesis access for streaming data.
+AWS MSK: manage cluster, create custom plugins and connectors for batch data processing.
+AWS MWAA: use of DAG to monitor workflow of batch processed data.
+Apache Kafka: to query and analyse Pinterest data pipeline.
+Databricks: manage and query batch and streaming data.
+Airflow UI: interface to monitor the workflow of the DAG for batch data.
+AWS Kinesis: to store and process streaming data.
+
 ## Instructions
 
 ### Setup
@@ -41,4 +52,5 @@ cd pinterest-data-pipeline804/
 ```
 ### Running the project
 1) The directory /documentation contains guidance for completing each milestone
-2) The directory /Databricks_notebooks contains notebooks used in Databricks for Batch processing the data
+2) The directory /Databricks_notebooks contains two further directories for the Batch processing and Stream processing parts of this project. The notebooks within here are run in Databricks.
+3) The directory /scripts contain the python scripts `user_posting_emulation.py` and `user_posting_emulation_streaming.py` to send data to the Kafka topics and Kinesis streams respectively.
